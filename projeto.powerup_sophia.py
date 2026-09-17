@@ -4,233 +4,202 @@ app = Flask(__name__)
 app.secret_key = "power_up_sophia_2026"
 
 
-# =========================================================
-# BANCO DE EXERCÍCIOS
-# =========================================================
+# ============================================================
+# BASE DE EXERCÍCIOS
+# ============================================================
 
 EXERCICIOS = {
 
     "gluteos": [
         {
             "nome": "Elevação de quadril",
-            "imagem": "elevacao_quadril.jpg",
             "musculos": "Glúteos",
-            "execucao": "Apoie as costas, mantenha os pés firmes no chão e eleve o quadril de forma controlada."
+            "execucao": "Deite-se de costas, dobre os joelhos e mantenha os pés firmes no chão. Contraia o abdômen e eleve o quadril de forma controlada, apertando os glúteos no ponto mais alto. Depois, abaixe lentamente sem deixar o movimento descontrolado."
         },
         {
             "nome": "Abdução de quadril",
-            "imagem": "abducao_quadril.jpg",
-            "musculos": "Glúteo médio e glúteo mínimo",
-            "execucao": "Mantenha o tronco estável e afaste as pernas lateralmente de maneira controlada."
+            "musculos": "Glúteos",
+            "execucao": "Mantenha o tronco firme e faça o movimento de afastar a perna para o lado de maneira controlada. Evite inclinar o corpo para compensar o movimento. Retorne lentamente à posição inicial."
         },
         {
             "nome": "Extensão de quadril",
-            "imagem": "extensao_quadril.jpg",
             "musculos": "Glúteos",
-            "execucao": "Leve a perna para trás mantendo o movimento controlado e o tronco estável."
+            "execucao": "Mantenha o tronco estável e leve uma perna para trás, realizando a extensão do quadril. Faça o movimento sem balançar o corpo e retorne lentamente à posição inicial."
         },
         {
             "nome": "Agachamento",
-            "imagem": "agachamento.jpg",
-            "musculos": "Glúteos e pernas",
-            "execucao": "Mantenha os pés firmes, flexione os joelhos e quadris e retorne de forma controlada."
+            "musculos": "Glúteos e quadríceps",
+            "execucao": "Fique em pé com os pés aproximadamente na largura dos ombros. Flexione os joelhos e leve o quadril para trás, mantendo o tronco estável. Desça de maneira confortável e depois volte à posição inicial controlando o movimento."
         },
         {
             "nome": "Stiff",
-            "imagem": "stiff.jpg",
             "musculos": "Glúteos e posteriores",
-            "execucao": "Incline o tronco mantendo a coluna estável e retorne controladamente."
+            "execucao": "Fique em pé com os pés firmes no chão e mantenha as costas em posição neutra. Leve o quadril para trás enquanto inclina o tronco, mantendo as pernas levemente flexionadas. Depois, volte à posição inicial usando o movimento do quadril."
         }
     ],
 
     "quadriceps": [
         {
             "nome": "Agachamento",
-            "imagem": "agachamento.jpg",
             "musculos": "Quadríceps e glúteos",
-            "execucao": "Flexione os joelhos e quadris mantendo o movimento controlado."
+            "execucao": "Posicione os pés de forma confortável, mantenha o peito aberto e flexione os joelhos enquanto leva o quadril para trás. Desça de maneira controlada e retorne à posição inicial sem realizar movimentos bruscos."
         },
         {
             "nome": "Leg press",
-            "imagem": "leg_press.jpg",
-            "musculos": "Quadríceps, glúteos e posteriores",
-            "execucao": "Empurre a plataforma de maneira controlada, sem realizar movimentos bruscos."
+            "musculos": "Quadríceps e glúteos",
+            "execucao": "Sente-se no equipamento e mantenha as costas apoiadas. Posicione os pés na plataforma e empurre controladamente, sem travar os joelhos. Depois, flexione novamente as pernas de forma lenta e controlada."
         },
         {
             "nome": "Cadeira extensora",
-            "imagem": "cadeira_extensora.jpg",
             "musculos": "Quadríceps",
-            "execucao": "Estenda os joelhos de maneira controlada e retorne lentamente."
+            "execucao": "Sente-se com as costas apoiadas e ajuste o equipamento de acordo com sua posição. Estenda os joelhos de forma controlada, aproximando as pernas da posição reta. Depois, retorne lentamente."
         }
     ],
 
     "posteriores": [
         {
             "nome": "Mesa flexora",
-            "imagem": "mesa_flexora.jpg",
             "musculos": "Posteriores da coxa",
-            "execucao": "Flexione os joelhos de maneira controlada e retorne lentamente."
+            "execucao": "Deite-se no equipamento com o corpo bem apoiado. Posicione as pernas corretamente e flexione os joelhos, aproximando os pés do corpo. Retorne lentamente à posição inicial."
         },
         {
             "nome": "Stiff",
-            "imagem": "stiff.jpg",
             "musculos": "Posteriores e glúteos",
-            "execucao": "Mantenha a coluna estável durante a inclinação do tronco."
+            "execucao": "Mantenha os pés firmes e os joelhos levemente flexionados. Leve o quadril para trás enquanto inclina o tronco, mantendo as costas em posição neutra. Retorne controladamente à posição inicial."
         },
         {
             "nome": "Flexão nórdica",
-            "imagem": "flexao_nordica.jpg",
             "musculos": "Posteriores da coxa",
-            "execucao": "Realize o movimento lentamente, mantendo o controle durante a descida."
+            "execucao": "Mantenha as pernas estabilizadas e o tronco alinhado. Incline o corpo lentamente para frente, controlando o movimento, e retorne à posição inicial de maneira segura."
         }
     ],
 
     "panturrilhas": [
         {
             "nome": "Elevação de panturrilha",
-            "imagem": "elevacao_panturrilha.jpg",
             "musculos": "Panturrilhas",
-            "execucao": "Eleve os calcanhares e retorne lentamente à posição inicial."
+            "execucao": "Fique em uma posição estável e eleve os calcanhares, apoiando o movimento na ponta dos pés. Faça uma pequena pausa no alto e depois abaixe lentamente."
         },
         {
             "nome": "Panturrilha no leg press",
-            "imagem": "panturrilha_leg_press.jpg",
             "musculos": "Panturrilhas",
-            "execucao": "Movimente os pés de forma controlada, realizando a elevação dos calcanhares."
+            "execucao": "Posicione os pés na parte adequada da plataforma, mantendo apenas a região da frente dos pés apoiada. Empurre a plataforma com o movimento dos tornozelos, elevando os calcanhares e retornando de forma controlada."
         }
     ],
 
     "costas": [
         {
             "nome": "Puxada frontal",
-            "imagem": "puxada_frontal.jpg",
-            "musculos": "Costas",
-            "execucao": "Puxe a barra em direção ao tronco mantendo os movimentos controlados."
+            "musculos": "Costas e bíceps",
+            "execucao": "Sente-se com o corpo estabilizado e segure a barra com as mãos afastadas. Puxe a barra em direção à parte superior do peito, mantendo os ombros controlados. Depois, retorne lentamente."
         },
         {
             "nome": "Remada baixa",
-            "imagem": "remada_baixa.jpg",
-            "musculos": "Costas",
-            "execucao": "Puxe o equipamento em direção ao tronco mantendo a postura estável."
+            "musculos": "Costas e bíceps",
+            "execucao": "Sente-se no equipamento e mantenha o tronco firme. Puxe o apoio em direção ao corpo, aproximando os cotovelos do tronco. Retorne lentamente, mantendo o controle durante todo o movimento."
         },
         {
             "nome": "Remada unilateral",
-            "imagem": "remada_unilateral.jpg",
             "musculos": "Costas",
-            "execucao": "Puxe o peso em direção ao corpo mantendo o tronco estável."
+            "execucao": "Apoie o corpo de maneira estável e mantenha a coluna em posição confortável. Puxe o peso em direção ao tronco, levando o cotovelo para trás. Depois, abaixe lentamente."
         },
         {
             "nome": "Pulldown",
-            "imagem": "pulldown.jpg",
             "musculos": "Costas",
-            "execucao": "Puxe o equipamento para baixo de maneira controlada."
+            "execucao": "Mantenha o corpo estável e segure o equipamento. Puxe o cabo para baixo utilizando principalmente o movimento dos braços e das costas. Retorne lentamente à posição inicial."
         }
     ],
 
     "peito": [
         {
             "nome": "Supino",
-            "imagem": "supino.jpg",
-            "musculos": "Peitoral",
-            "execucao": "Empurre o equipamento de maneira controlada e retorne lentamente."
+            "musculos": "Peitoral, ombros e tríceps",
+            "execucao": "Deite-se com as costas apoiadas e mantenha os pés firmes. Segure o peso com as mãos e desça de forma controlada em direção ao peito. Depois, empurre o peso para cima sem realizar movimentos bruscos."
         },
         {
             "nome": "Crucifixo",
-            "imagem": "crucifixo.jpg",
             "musculos": "Peitoral",
-            "execucao": "Abra e feche os braços de maneira controlada."
+            "execucao": "Mantenha as costas apoiadas e os braços posicionados de maneira confortável. Abra os braços de forma controlada e depois aproxime-os novamente, mantendo o movimento lento e estável."
         },
         {
             "nome": "Flexão de braços",
-            "imagem": "flexao.jpg",
-            "musculos": "Peitoral, braços e ombros",
-            "execucao": "Mantenha o corpo alinhado e realize a flexão de forma controlada."
+            "musculos": "Peitoral, ombros e tríceps",
+            "execucao": "Posicione as mãos no chão e mantenha o corpo alinhado. Flexione os cotovelos para aproximar o corpo do chão e depois empurre o chão para retornar à posição inicial."
         }
     ],
 
     "ombros": [
         {
             "nome": "Elevação lateral",
-            "imagem": "elevacao_lateral.jpg",
             "musculos": "Ombros",
-            "execucao": "Eleve os braços lateralmente até uma posição confortável e retorne lentamente."
+            "execucao": "Fique em pé com os braços ao lado do corpo. Eleve os braços para os lados de maneira controlada, sem balançar o tronco. Depois, abaixe lentamente."
         },
         {
             "nome": "Desenvolvimento de ombros",
-            "imagem": "desenvolvimento_ombros.jpg",
-            "musculos": "Ombros",
-            "execucao": "Empurre o equipamento para cima mantendo o movimento controlado."
+            "musculos": "Ombros e tríceps",
+            "execucao": "Mantenha o corpo estabilizado e segure os pesos na altura dos ombros. Empurre os pesos para cima de maneira controlada e depois retorne lentamente à posição inicial."
         },
         {
             "nome": "Elevação frontal",
-            "imagem": "elevacao_frontal.jpg",
             "musculos": "Ombros",
-            "execucao": "Eleve os braços à frente de maneira controlada."
+            "execucao": "Fique em pé e mantenha os braços próximos ao corpo. Eleve os braços para a frente até uma altura confortável e depois abaixe lentamente, mantendo o tronco estável."
         }
     ],
 
     "biceps": [
         {
             "nome": "Rosca direta",
-            "imagem": "rosca_direta.jpg",
             "musculos": "Bíceps",
-            "execucao": "Flexione os cotovelos mantendo os braços estáveis."
+            "execucao": "Fique em pé com os braços próximos ao corpo. Flexione os cotovelos para aproximar as mãos dos ombros, sem balançar o tronco. Depois, estenda os braços lentamente."
         },
         {
             "nome": "Rosca martelo",
-            "imagem": "rosca_martelo.jpg",
             "musculos": "Bíceps e antebraços",
-            "execucao": "Flexione os cotovelos mantendo as mãos em posição neutra."
+            "execucao": "Segure os pesos com as palmas das mãos voltadas uma para a outra. Flexione os cotovelos mantendo os braços próximos ao corpo. Depois, retorne lentamente."
         },
         {
             "nome": "Rosca alternada",
-            "imagem": "rosca_alternada.jpg",
             "musculos": "Bíceps",
-            "execucao": "Realize a flexão dos cotovelos alternando os braços."
+            "execucao": "Segure um peso em cada mão. Flexione um braço de cada vez, mantendo o cotovelo próximo ao corpo. Abaixe lentamente e repita com o outro braço."
         }
     ],
 
     "triceps": [
         {
             "nome": "Tríceps na polia",
-            "imagem": "triceps_polia.jpg",
             "musculos": "Tríceps",
-            "execucao": "Estenda os cotovelos mantendo os braços próximos ao corpo."
+            "execucao": "Fique de frente para a polia e mantenha os cotovelos próximos ao corpo. Empurre o cabo para baixo até estender os braços e depois retorne lentamente à posição inicial."
         },
         {
             "nome": "Tríceps francês",
-            "imagem": "triceps_frances.jpg",
             "musculos": "Tríceps",
-            "execucao": "Flexione e estenda os cotovelos de maneira controlada."
+            "execucao": "Segure o peso acima da cabeça e mantenha os cotovelos apontados para frente. Flexione os cotovelos levando o peso para trás da cabeça e depois estenda os braços de maneira controlada."
         }
     ],
 
     "abdomen": [
         {
             "nome": "Abdominal tradicional",
-            "imagem": "abdominal.jpg",
             "musculos": "Abdômen",
-            "execucao": "Realize a flexão do tronco de maneira controlada, evitando movimentos bruscos."
+            "execucao": "Deite-se com os joelhos flexionados e os pés apoiados. Contraia o abdômen e eleve o tronco de forma controlada, sem puxar o pescoço. Depois, retorne lentamente."
         },
         {
             "nome": "Prancha",
-            "imagem": "prancha.jpg",
-            "musculos": "Abdômen e estabilizadores",
-            "execucao": "Mantenha o corpo alinhado e sustente a posição com controle."
+            "musculos": "Abdômen e core",
+            "execucao": "Apoie os antebraços e mantenha o corpo alinhado. Contraia o abdômen e evite deixar o quadril cair ou subir excessivamente. Mantenha a posição de forma confortável e controlada."
         },
         {
             "nome": "Abdominal bicicleta",
-            "imagem": "abdominal_bicicleta.jpg",
             "musculos": "Abdômen",
-            "execucao": "Realize o movimento de forma controlada, mantendo a postura estável."
+            "execucao": "Deite-se de costas e mantenha os joelhos flexionados. Faça o movimento alternado das pernas enquanto realiza a rotação controlada do tronco. Evite puxar o pescoço durante o exercício."
         }
     ]
 }
 
 
-# =========================================================
-# RELAÇÃO ENTRE GRUPOS
-# =========================================================
+# ============================================================
+# GRUPOS RELACIONADOS
+# ============================================================
 
 GRUPOS_RELACIONADOS = {
     "gluteos": ["posteriores", "quadriceps"],
@@ -246,288 +215,249 @@ GRUPOS_RELACIONADOS = {
 }
 
 
-# =========================================================
-# LOGIN
-# =========================================================
+# ============================================================
+# ESTILO GERAL
+# ============================================================
 
-LOGIN_HTML = """
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Power Up | Login</title>
-
+ESTILO = """
 <style>
 
 * {
     box-sizing: border-box;
 }
 
-html {
-    width: 100%;
-    overflow-x: hidden;
-}
-
 body {
     margin: 0;
-    width: 100%;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #eee8ff, #ffffff, #f5efff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #30263d;
-    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f5efff, #eee5ff);
+    color: #302442;
 }
 
-.container {
-    width: 950px;
-    max-width: 94%;
-    min-height: 580px;
-    background: white;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(83, 54, 150, 0.15);
-    display: grid;
-    grid-template-columns: 45% 55%;
+a {
+    text-decoration: none;
 }
 
-.lado-esquerdo {
-    background: linear-gradient(145deg, #7046d8, #9270e8);
-    color: white;
-    padding: 55px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.lado-esquerdo h1 {
-    font-size: 48px;
-    margin: 0 0 15px;
-}
-
-.lado-esquerdo p {
-    line-height: 1.6;
-    opacity: .9;
-}
-
-.icone {
-    font-size: 65px;
-    margin-bottom: 15px;
-}
-
-.lado-direito {
-    padding: 55px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+button,
+input {
+    font-family: inherit;
 }
 
 .logo {
-    color: #7046d8;
-    font-size: 30px;
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #6f3fb5;
+}
+
+.botao {
+    display: inline-block;
+    border: none;
+    background: linear-gradient(135deg, #8e5bd5, #6f3fb5);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 13px;
+    font-size: 15px;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-h2 {
-    font-size: 30px;
-    margin-bottom: 8px;
+.botao:hover {
+    transform: translateY(-2px);
 }
 
-.subtitulo {
-    color: #777;
-    margin-bottom: 25px;
+.voltar {
+    display: inline-block;
+    color: #6f3fb5;
+    font-weight: bold;
+    margin-bottom: 18px;
 }
 
 input {
     width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+    padding: 13px;
+    border: 1px solid #d9cbed;
     border-radius: 12px;
     outline: none;
-    font-size: 15px;
+    background: white;
 }
 
 input:focus {
-    border-color: #7046d8;
+    border-color: #8e5bd5;
 }
 
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 13px;
-    background: #7046d8;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #5d35c1;
-}
-
-.cadastro {
-    text-align: center;
-    margin-top: 20px;
-    color: #777;
-}
-
-.cadastro a {
-    color: #7046d8;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-@media (max-width: 750px) {
-
-    body {
-        padding: 15px;
-        align-items: flex-start;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 100%;
-        min-height: auto;
-        display: block;
-        border-radius: 22px;
-        margin: 20px auto;
-    }
-
-    .lado-esquerdo {
-        display: block;
-        padding: 35px 25px;
-        text-align: center;
-    }
-
-    .lado-esquerdo h1 {
-        font-size: 36px;
-    }
-
-    .lado-esquerdo p {
-        font-size: 14px;
-    }
-
-    .icone {
-        font-size: 50px;
-    }
-
-    .lado-direito {
-        padding: 30px 25px;
-    }
-
-    h2 {
-        font-size: 25px;
-    }
-
-    input,
-    button {
-        font-size: 16px;
-        padding: 14px;
-    }
-}
-
-@media (max-width: 400px) {
-
-    body {
-        padding: 8px;
-    }
-
-    .container {
-        margin: 10px auto;
-    }
-
-    .lado-esquerdo {
-        padding: 25px 18px;
-    }
-
-    .lado-direito {
-        padding: 25px 18px;
-    }
-
-    .lado-esquerdo h1 {
-        font-size: 31px;
-    }
-
-    h2 {
-        font-size: 23px;
-    }
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
 }
 
 </style>
+"""
 
+
+# ============================================================
+# LOGIN
+# ============================================================
+
+LOGIN_HTML = """
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Up - Login</title>
+""" + ESTILO + """
+<style>
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 950px;
+    min-height: 570px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 15px 45px rgba(80, 45, 120, 0.15);
+}
+
+.login-left {
+    background: linear-gradient(145deg, #8e5bd5, #61349f);
+    color: white;
+    padding: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-left h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.login-left p {
+    line-height: 1.7;
+}
+
+.login-right {
+    padding: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-right h2 {
+    margin-bottom: 8px;
+}
+
+.campo {
+    margin: 15px 0;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.cadastro-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media(max-width: 750px) {
+
+    .login-box {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        display: none;
+    }
+
+    .login-right {
+        padding: 35px 25px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="login-page">
 
-    <div class="lado-esquerdo">
+<div class="login-box">
 
-        <div class="icone">💜</div>
+<div class="login-left">
 
-        <h1>POWER UP</h1>
+<h1>POWER UP</h1>
 
-        <p>
-            Seu espaço para organizar seus treinos,
-            descobrir exercícios e acompanhar seu
-            planejamento semanal.
-        </p>
+<p>
+Seu espaço para conhecer exercícios,
+montar treinos e receber auxílio da
+assistente virtual Wendy.
+</p>
 
-        <p>
-            ✨ Treinos personalizados<br>
-            🤖 Assistente Wendy<br>
-            📅 Planejamento semanal
-        </p>
+</div>
 
-    </div>
+<div class="login-right">
 
-    <div class="lado-direito">
+<div class="logo">POWER UP</div>
 
-        <div class="logo">POWER UP</div>
+<h2>Entrar</h2>
 
-        <h2>Bem-vinda de volta!</h2>
+<p>Entre para acessar sua conta.</p>
 
-        <p class="subtitulo">
-            Entre para acessar seu planejamento.
-        </p>
+<form method="POST">
 
-        <form method="POST">
+<div class="campo">
 
-            <input
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                required
-            >
+<label>E-mail</label>
 
-            <input
-                type="password"
-                name="senha"
-                placeholder="Senha"
-                required
-            >
+<input type="email" name="email" required>
 
-            <button type="submit">
-                Entrar
-            </button>
+</div>
 
-        </form>
+<div class="campo">
 
-        <div class="cadastro">
-            Ainda não possui uma conta?
-            <a href="/cadastro">Criar conta</a>
-        </div>
+<label>Senha</label>
 
-    </div>
+<input type="password" name="senha" required>
+
+</div>
+
+<button class="botao" type="submit">
+Entrar
+</button>
+
+</form>
+
+<div class="cadastro-link">
+
+Ainda não possui cadastro?
+
+<br><br>
+
+<a href="{{ url_for('cadastro') }}" class="botao">
+Criar conta
+</a>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -536,9 +466,9 @@ button:hover {
 """
 
 
-# =========================================================
+# ============================================================
 # CADASTRO
-# =========================================================
+# ============================================================
 
 CADASTRO_HTML = """
 <!DOCTYPE html>
@@ -549,173 +479,70 @@ CADASTRO_HTML = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Power Up | Cadastro</title>
+<title>Cadastro - Power Up</title>
+
+""" + ESTILO + """
 
 <style>
 
-* {
-    box-sizing: border-box;
+.cadastro-page {
+    min-height: 100vh;
+    padding: 35px 15px;
 }
 
-html,
-body {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #eee8ff, #ffffff);
-    color: #30263d;
-    padding: 20px 0;
-}
-
-.container {
-    width: 650px;
-    max-width: 94%;
-    margin: 25px auto;
+.cadastro-box {
     background: white;
-    padding: 45px;
-    border-radius: 28px;
-    box-shadow: 0 15px 45px rgba(83, 54, 150, .12);
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 15px 45px rgba(80, 45, 120, 0.12);
 }
 
-.logo {
+.cadastro-box h1 {
     text-align: center;
-    color: #7046d8;
-    font-size: 32px;
-    font-weight: bold;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.subtitulo {
-    text-align: center;
-    color: #777;
-    margin-bottom: 30px;
-}
-
-.grid {
+.form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
 .campo {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 5px;
 }
 
-.campo-largo {
-    grid-column: 1 / 3;
-}
-
-label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-input {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 11px;
-    font-size: 15px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #7046d8;
-}
-
-button {
-    width: 100%;
-    margin-top: 25px;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: #7046d8;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #5d35c1;
-}
-
-.voltar {
+.campo label {
     display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #7046d8;
-    text-decoration: none;
+    margin-bottom: 7px;
     font-weight: bold;
 }
 
-@media (max-width: 600px) {
+.full {
+    grid-column: 1 / -1;
+}
 
-    body {
-        padding: 10px 0;
+.botao-area {
+    text-align: center;
+    margin-top: 25px;
+}
+
+@media(max-width: 600px) {
+
+    .cadastro-box {
+        padding: 25px 20px;
     }
 
-    .container {
-        width: 95%;
-        max-width: 100%;
-        margin: 20px auto;
-        padding: 28px 20px;
-        border-radius: 20px;
-    }
-
-    .logo {
-        font-size: 27px;
-    }
-
-    h1 {
-        font-size: 25px;
-    }
-
-    .subtitulo {
-        font-size: 14px;
-    }
-
-    .grid {
+    .form-grid {
         grid-template-columns: 1fr;
-        gap: 14px;
     }
 
-    .campo-largo {
+    .full {
         grid-column: auto;
     }
 
-    input {
-        width: 100%;
-        font-size: 16px;
-        padding: 14px;
-    }
-
-    button {
-        padding: 15px;
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .container {
-        width: 96%;
-        padding: 24px 16px;
-    }
-
-    h1 {
-        font-size: 23px;
-    }
 }
 
 </style>
@@ -724,88 +551,112 @@ button:hover {
 
 <body>
 
-<div class="container">
+<div class="cadastro-page">
 
-    <div class="logo">POWER UP 💜</div>
+<div class="cadastro-box">
 
-    <h1>Crie sua conta</h1>
+<a class="voltar" href="{{ url_for('login') }}">
+← Voltar
+</a>
 
-    <p class="subtitulo">
-        Preencha seus dados para começar.
-    </p>
+<h1>Crie sua conta</h1>
 
-    <form method="POST">
+<p style="text-align:center;">
+Cadastre seus dados para acessar o Power Up.
+</p>
 
-        <div class="grid">
+<form method="POST">
 
-            <div class="campo campo-largo">
-                <label>Nome completo</label>
-                <input type="text" name="nome" required>
-            </div>
+<div class="form-grid">
 
-            <div class="campo">
-                <label>E-mail</label>
-                <input type="email" name="email" required>
-            </div>
+<div class="campo">
 
-            <div class="campo">
-                <label>Telefone</label>
-                <input type="tel" name="telefone" required>
-            </div>
+<label>Nome</label>
 
-            <div class="campo">
-                <label>CEP</label>
-                <input type="text" name="cep" required>
-            </div>
+<input type="text" name="nome" required>
 
-            <div class="campo">
-                <label>Data de nascimento</label>
-                <input type="date" name="nascimento" required>
-            </div>
+</div>
 
-            <div class="campo campo-largo">
-                <label>Academia onde você treina</label>
-                <input
-                    type="text"
-                    name="academia"
-                    placeholder="Ex.: Nova Fit"
-                    required
-                >
-            </div>
+<div class="campo">
 
-            <div class="campo">
-                <label>Senha</label>
-                <input type="password" name="senha" required>
-            </div>
+<label>E-mail</label>
 
-            <div class="campo">
-                <label>Confirmar senha</label>
-                <input type="password" name="confirmar" required>
-            </div>
+<input type="email" name="email" required>
 
-        </div>
+</div>
 
-        <button type="submit">
-            Criar minha conta
-        </button>
+<div class="campo">
 
-    </form>
+<label>Telefone</label>
 
-    <a class="voltar" href="/">
-        Já tenho uma conta
-    </a>
+<input type="text" name="telefone" required>
+
+</div>
+
+<div class="campo">
+
+<label>CEP</label>
+
+<input type="text" name="cep" required>
+
+</div>
+
+<div class="campo">
+
+<label>Data de nascimento</label>
+
+<input type="date" name="data_nascimento" required>
+
+</div>
+
+<div class="campo">
+
+<label>Academia</label>
+
+<input type="text" name="academia" required>
+
+</div>
+
+<div class="campo">
+
+<label>Senha</label>
+
+<input type="password" name="senha" required>
+
+</div>
+
+<div class="campo">
+
+<label>Confirmar senha</label>
+
+<input type="password" name="confirmar_senha" required>
+
+</div>
+
+</div>
+
+<div class="botao-area">
+
+<button class="botao" type="submit">
+Cadastrar
+</button>
+
+</div>
+
+</form>
+
+</div>
 
 </div>
 
 </body>
-
 </html>
 """
 
 
-# =========================================================
+# ============================================================
 # HOME
-# =========================================================
+# ============================================================
 
 HOME_HTML = """
 <!DOCTYPE html>
@@ -818,303 +669,84 @@ HOME_HTML = """
 
 <title>Power Up</title>
 
+""" + ESTILO + """
+
 <style>
 
-* {
-    box-sizing: border-box;
+.home {
+    min-height: 100vh;
 }
 
-html,
-body {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f5ff;
-    color: #30263d;
-}
-
-header {
-    min-height: 75px;
+.header {
     background: white;
+    padding: 18px 5%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 65px;
-    box-shadow: 0 3px 15px rgba(0,0,0,.06);
-}
-
-.logo {
-    color: #7046d8;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-nav {
-    display: flex;
     align-items: center;
-    flex-wrap: wrap;
-}
-
-nav a {
-    color: #5f5869;
-    text-decoration: none;
-    margin-left: 28px;
-    font-weight: 600;
-}
-
-nav a:hover {
-    color: #7046d8;
+    box-shadow: 0 4px 15px rgba(70, 40, 100, 0.08);
 }
 
 .hero {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 75px 25px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    text-align: center;
+    padding: 65px 20px 35px;
 }
 
-.hero-text {
-    max-width: 620px;
-}
-
-.tag {
-    display: inline-block;
-    background: #ebe3ff;
-    color: #7046d8;
-    padding: 8px 14px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-h1 {
-    font-size: 47px;
-    line-height: 1.1;
-    margin: 18px 0;
-}
-
-h1 span {
-    color: #7046d8;
+.hero h1 {
+    font-size: 42px;
+    margin: 0;
 }
 
 .hero p {
-    color: #6f6879;
     font-size: 18px;
-    line-height: 1.6;
-}
-
-.botao {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 16px 28px;
-    background: #7046d8;
-    color: white;
-    text-decoration: none;
-    border-radius: 13px;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(112,70,216,.25);
-}
-
-.botao:hover {
-    background: #5d35c1;
-}
-
-.hero-card {
-    width: 290px;
-    background: linear-gradient(145deg, #7046d8, #a188ed);
-    border-radius: 30px;
-    padding: 35px;
-    color: white;
-    box-shadow: 0 15px 35px rgba(112,70,216,.25);
-}
-
-.hero-card .emoji {
-    font-size: 60px;
-}
-
-.hero-card h2 {
-    margin: 15px 0 8px;
+    color: #665a75;
 }
 
 .cards {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 25px 80px;
+    width: 92%;
+    max-width: 1000px;
+    margin: 25px auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
 }
 
 .card {
     background: white;
-    padding: 27px;
+    padding: 30px;
     border-radius: 22px;
-    box-shadow: 0 7px 25px rgba(0,0,0,.06);
+    box-shadow: 0 10px 30px rgba(70, 40, 100, 0.10);
 }
 
-.card .icon {
-    font-size: 32px;
+.card h2 {
+    color: #6f3fb5;
 }
 
-.card h3 {
-    color: #7046d8;
-}
-
-.card p {
-    color: #777;
-    line-height: 1.5;
-}
-
-/* WENDY */
-
-.wendy-button {
+.wendy-float {
     position: fixed;
-    right: 28px;
-    bottom: 28px;
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    border: 5px solid white;
-    background: linear-gradient(145deg, #7046d8, #9b80e8);
-    box-shadow: 0 8px 25px rgba(0,0,0,.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    cursor: pointer;
-    z-index: 20;
+    right: 22px;
+    bottom: 22px;
+    background: #6f3fb5;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(70, 40, 100, 0.25);
 }
 
-.wendy-msg {
-    position: fixed;
-    right: 28px;
-    bottom: 120px;
-    background: white;
-    padding: 14px 18px;
-    border-radius: 18px;
-    box-shadow: 0 7px 25px rgba(0,0,0,.12);
-    z-index: 19;
-    max-width: 240px;
-    font-size: 14px;
-}
+@media(max-width: 700px) {
 
-.wendy-msg strong {
-    color: #7046d8;
-}
-
-@media (max-width: 800px) {
-
-    header {
-        min-height: auto;
-        padding: 18px 20px;
-        flex-direction: column;
-        gap: 15px;
+    .header {
+        padding: 16px 20px;
     }
 
-    .logo {
-        font-size: 25px;
-    }
-
-    nav {
-        width: 100%;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    nav a {
-        margin-left: 0;
-        font-size: 14px;
-        padding: 7px 8px;
-    }
-
-    .hero {
-        width: 100%;
-        padding: 40px 20px 20px;
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-
-    .hero-text {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    h1 {
-        font-size: 35px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    .botao {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .hero-card {
-        width: 100%;
-        max-width: 350px;
-        padding: 28px;
+    .hero h1 {
+        font-size: 32px;
     }
 
     .cards {
-        width: 100%;
-        padding: 10px 20px 100px;
         grid-template-columns: 1fr;
-        gap: 15px;
     }
 
-    .card {
-        padding: 22px;
-    }
-
-    .wendy-button {
-        width: 62px;
-        height: 62px;
-        right: 18px;
-        bottom: 18px;
-        font-size: 30px;
-    }
-
-    .wendy-msg {
-        right: 18px;
-        bottom: 92px;
-        max-width: 210px;
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .hero {
-        padding-top: 30px;
-    }
-
-    h1 {
-        font-size: 30px;
-    }
-
-    .tag {
-        font-size: 11px;
-    }
-
-    nav a {
-        font-size: 12px;
-        padding: 6px;
-    }
-
-    .hero-card {
-        padding: 25px 20px;
-    }
 }
 
 </style>
@@ -1123,121 +755,76 @@ h1 span {
 
 <body>
 
-<header>
+<div class="home">
 
-    <div class="logo">POWER UP</div>
+<div class="header">
 
-    <nav>
-        <a href="/home">Início</a>
-        <a href="/treino">Montar treino</a>
-        <a href="/sair">Sair</a>
-    </nav>
+<div class="logo">POWER UP</div>
 
-</header>
+<a href="{{ url_for('sair') }}" class="voltar">
+Sair
+</a>
 
-<section class="hero">
-
-    <div class="hero-text">
-
-        <span class="tag">
-            SEU TREINO, SUA ROTINA
-        </span>
-
-        <h1>
-            Olá, <span>{{ nome }}</span>! 💜
-        </h1>
-
-        <p>
-            Organize seus treinos da semana de forma
-            prática e receba sugestões de exercícios
-            de acordo com suas preferências.
-        </p>
-
-        <a class="botao" href="/treino">
-            🏋️ Montar meu treino
-        </a>
-
-    </div>
-
-    <div class="hero-card">
-
-        <div class="emoji">👩🏻‍💻</div>
-
-        <h2>Wendy</h2>
-
-        <p>
-            Sua assistente virtual do Power Up.
-            Clique em mim quando tiver alguma dúvida!
-        </p>
-
-    </div>
-
-</section>
-
-<section class="cards">
-
-    <div class="card">
-
-        <div class="icon">🎯</div>
-
-        <h3>Seus objetivos</h3>
-
-        <p>
-            Escolha até dois objetivos para
-            personalizar sua experiência.
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <div class="icon">📅</div>
-
-        <h3>Sua semana</h3>
-
-        <p>
-            Escolha os dias em que pode treinar
-            e receba seu planejamento.
-        </p>
-
-    </div>
-
-    <div class="card">
-
-        <div class="icon">💪</div>
-
-        <h3>Seus exercícios</h3>
-
-        <p>
-            Clique na seta de cada exercício
-            para aprender como executá-lo.
-        </p>
-
-    </div>
-
-</section>
-
-<div class="wendy-msg">
-    <strong>Wendy 💜</strong><br>
-    Oii! Posso ajudar com suas dúvidas.
 </div>
 
-<div
-    class="wendy-button"
-    onclick="window.location.href='/wendy'"
->
-    👩🏻‍💻
+<div class="hero">
+
+<h1>Olá, {{ nome }}! 💜</h1>
+
+<p>
+Bem-vinda ao Power Up.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h2>🏋️ Montar treino</h2>
+
+<p>
+Escolha seus objetivos, grupos musculares,
+tempo disponível e os dias da semana.
+</p>
+
+<a href="{{ url_for('treino') }}" class="botao">
+Montar meu treino
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>💬 Wendy</h2>
+
+<p>
+Converse com a assistente virtual do Power Up
+e tire dúvidas sobre exercícios e sobre a plataforma.
+</p>
+
+<a href="{{ url_for('wendy') }}" class="botao">
+Conversar com Wendy
+</a>
+
+</div>
+
+</div>
+
+<a href="{{ url_for('wendy') }}" class="wendy-float">
+💬 Wendy
+</a>
+
 </div>
 
 </body>
-
 </html>
 """
 
 
-# =========================================================
+# ============================================================
 # WENDY
-# =========================================================
+# ============================================================
 
 WENDY_HTML = """
 <!DOCTYPE html>
@@ -1248,68 +835,47 @@ WENDY_HTML = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wendy | Power Up</title>
+<title>Wendy - Power Up</title>
+
+""" + ESTILO + """
 
 <style>
 
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #eee8ff, #faf9ff);
-    color: #30263d;
-}
-
-header {
-    background: white;
-    padding: 22px 60px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.06);
-}
-
-.logo {
-    color: #7046d8;
-    font-weight: bold;
-    font-size: 27px;
+.wendy-page {
+    min-height: 100vh;
+    padding: 25px 15px;
 }
 
 .chat {
-    width: 650px;
-    max-width: 94%;
-    margin: 50px auto;
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
     background: white;
     border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 15px 45px rgba(0,0,0,.1);
+    box-shadow: 0 15px 40px rgba(70, 40, 100, 0.15);
 }
 
 .chat-top {
-    background: linear-gradient(135deg, #7046d8, #9a82e7);
+    background: linear-gradient(135deg, #8e5bd5, #6f3fb5);
+    padding: 22px;
     color: white;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    text-align: center;
 }
 
-.avatar {
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
+.chat-top h1 {
+    margin: 0;
+}
+
+.subtitulo-wendy {
+    display: inline-block;
+    margin-top: 9px;
+    padding: 6px 12px;
+    border-radius: 20px;
     background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    flex-shrink: 0;
+    color: #5b348c;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .chat-body {
@@ -1317,98 +883,45 @@ header {
 }
 
 .mensagem {
-    background: #f1ecff;
+    background: #f0e8fb;
     padding: 17px;
     border-radius: 17px;
-    margin-bottom: 25px;
-    line-height: 1.5;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.perguntas {
+    display: grid;
+    gap: 12px;
 }
 
 .pergunta {
-    color: #7046d8;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.opcoes a {
-    display: block;
+    background: white;
+    border: 1px solid #d9cbed;
+    border-radius: 14px;
     padding: 14px;
-    background: #faf9ff;
-    border: 1px solid #e3ddf5;
-    border-radius: 12px;
-    text-decoration: none;
-    color: #43394f;
-    margin: 10px 0;
-}
-
-.opcoes a:hover {
-    background: #eee8ff;
-    border-color: #7046d8;
-}
-
-.voltar {
-    display: inline-block;
-    margin-top: 15px;
-    color: #7046d8;
-    text-decoration: none;
+    color: #5b348c;
     font-weight: bold;
 }
 
-@media (max-width: 700px) {
+@media(max-width: 500px) {
 
-    header {
-        padding: 18px 20px;
-    }
-
-    .logo {
-        font-size: 24px;
-    }
-
-    .chat {
-        width: 95%;
-        max-width: 100%;
-        margin: 25px auto;
-        border-radius: 20px;
-    }
-
-    .chat-top {
-        padding: 20px;
+    .wendy-page {
+        padding: 15px 10px;
     }
 
     .chat-body {
-        padding: 20px;
-    }
-
-    .mensagem {
-        padding: 14px;
-        font-size: 14px;
-    }
-
-    .opcoes a {
-        padding: 15px 12px;
-        font-size: 14px;
-    }
-
-    .avatar {
-        width: 50px;
-        height: 50px;
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .chat {
-        width: 96%;
-    }
-
-    .chat-body {
-        padding: 16px;
+        padding: 20px 17px;
     }
 
     .chat-top {
-        padding: 18px;
+        padding: 20px 12px;
     }
+
+    .subtitulo-wendy {
+        font-size: 13px;
+    }
+
 }
 
 </style>
@@ -1417,90 +930,239 @@ header {
 
 <body>
 
-<header>
-    <div class="logo">POWER UP</div>
-</header>
+<div class="wendy-page">
+
+<a href="{{ url_for('home') }}" class="voltar">
+← Início
+</a>
 
 <div class="chat">
 
-    <div class="chat-top">
+<div class="chat-top">
 
-        <div class="avatar">
-            👩🏻‍💻
-        </div>
+<div style="font-size:45px;">👩🏻‍💻</div>
 
-        <div>
-            <strong>Wendy</strong><br>
-            Assistente virtual
-        </div>
+<h1>Wendy</h1>
 
-    </div>
+<div class="subtitulo-wendy">
+Sua assistente virtual
+</div>
 
-    <div class="chat-body">
+</div>
 
-        <div class="mensagem">
+<div class="chat-body">
 
-            Oii! Eu sou a Wendy 💜<br><br>
+<div class="mensagem">
 
-            Posso ajudar você com dúvidas sobre
-            exercícios e também explicar como funciona
-            o Power Up.
+Oi! Eu sou a Wendy 💜<br><br>
 
-        </div>
+Posso ajudar você a conhecer os exercícios
+e entender melhor como funciona o Power Up.
 
-        <div class="pergunta">
-            Como posso ajudar?
-        </div>
+</div>
 
-        <div class="opcoes">
+<div class="perguntas">
 
-            <a href="/wendy?duvida=agachamento">
-                🏋️ O que é o agachamento?
-            </a>
+<a href="{{ url_for('treino') }}" class="pergunta">
+🏋️ Quero montar meu treino
+</a>
 
-            <a href="/wendy?duvida=treino">
-                📅 Como funciona o treino semanal?
-            </a>
+<a href="{{ url_for('duvidas_exercicios') }}" class="pergunta">
+❓ Quero saber sobre exercícios
+</a>
 
-            <a href="/wendy?duvida=exercicios">
-                💪 Como escolho meus exercícios?
-            </a>
+<a href="{{ url_for('home') }}" class="pergunta">
+🏠 Voltar para o início
+</a>
 
-            <a href="/treino">
-                ✨ Quero montar meu treino
-            </a>
+</div>
 
-        </div>
+</div>
 
-        {% if resposta %}
-
-        <div class="mensagem">
-
-            <strong>Wendy:</strong><br><br>
-
-            {{ resposta }}
-
-        </div>
-
-        {% endif %}
-
-        <a class="voltar" href="/home">
-            ← Voltar para início
-        </a>
-
-    </div>
+</div>
 
 </div>
 
 </body>
-
 </html>
 """
 
 
-# =========================================================
-# FORMULÁRIO DE TREINO
-# =========================================================
+# ============================================================
+# DÚVIDAS SOBRE EXERCÍCIOS
+# ============================================================
+
+DUVIDAS_HTML = """
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dúvidas sobre exercícios - Power Up</title>
+
+""" + ESTILO + """
+
+<style>
+
+.duvidas-page {
+    min-height: 100vh;
+    padding: 25px 15px 50px;
+}
+
+.duvidas-box {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(70, 40, 100, 0.12);
+}
+
+.duvidas-box h1 {
+    text-align: center;
+    margin-top: 0;
+    color: #302442;
+}
+
+.introducao {
+    text-align: center;
+    color: #665a75;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.exercicio-duvida {
+    border: 1px solid #dfd4ed;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.exercicio-duvida summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-weight: bold;
+    color: #5b348c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercicio-duvida summary::-webkit-details-marker {
+    display: none;
+}
+
+.exercicio-duvida summary::after {
+    content: "⌄";
+    font-size: 22px;
+    color: #6f3fb5;
+    transition: 0.2s;
+}
+
+.exercicio-duvida[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.exercicio-conteudo {
+    padding: 0 20px 20px;
+    background: #faf8ff;
+    border-top: 1px solid #eee5f7;
+    line-height: 1.6;
+}
+
+.exercicio-conteudo p {
+    margin: 12px 0 0;
+}
+
+@media(max-width: 600px) {
+
+    .duvidas-page {
+        padding: 15px 10px 35px;
+    }
+
+    .duvidas-box {
+        padding: 25px 17px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="duvidas-page">
+
+<a href="{{ url_for('wendy') }}" class="voltar">
+← Voltar para Wendy
+</a>
+
+<div class="duvidas-box">
+
+<h1>❓ Dúvidas sobre exercícios</h1>
+
+<p class="introducao">
+Clique em um exercício para ver os músculos trabalhados
+e entender como realizar o movimento.
+</p>
+
+
+{% for exercicio in exercicios %}
+
+<details class="exercicio-duvida">
+
+<summary>
+{{ exercicio.nome }}
+</summary>
+
+<div class="exercicio-conteudo">
+
+<p>
+<strong>Músculos trabalhados:</strong>
+{{ exercicio.musculos }}
+</p>
+
+<p>
+<strong>Como executar:</strong><br>
+{{ exercicio.execucao }}
+</p>
+
+</div>
+
+</details>
+
+{% endfor %}
+
+
+<br>
+
+<div style="text-align:center;">
+
+<a href="{{ url_for('treino') }}" class="botao">
+🏋️ Montar meu treino
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+"""
+
+
+# ============================================================
+# MONTAR TREINO
+# ============================================================
 
 TREINO_HTML = """
 <!DOCTYPE html>
@@ -1511,627 +1173,398 @@ TREINO_HTML = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Montar treino | Power Up</title>
+<title>Montar treino - Power Up</title>
+
+""" + ESTILO + """
 
 <style>
 
-* {
-    box-sizing: border-box;
+.treino-page {
+    min-height: 100vh;
+    padding: 25px 15px 50px;
 }
 
-html,
-body {
+.topo-treino {
+    position: relative;
     width: 100%;
-    overflow-x: hidden;
+    max-width: 1100px;
+    margin: 0 auto 35px;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f5ff;
-    color: #30263d;
+.topo-treino .logo {
+    text-align: center;
 }
 
-header {
+.botao-inicio {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     background: white;
-    padding: 22px 60px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.06);
-}
-
-.logo {
-    color: #7046d8;
-    font-size: 27px;
+    color: #6f3fb5;
+    border: 1px solid #d9cbed;
+    padding: 9px 15px;
+    border-radius: 12px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
-.formulario {
-    width: 750px;
-    max-width: 94%;
-    margin: 40px auto;
+.treino-box {
     background: white;
-    padding: 40px;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 35px;
     border-radius: 25px;
-    box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    box-shadow: 0 15px 40px rgba(70, 40, 100, 0.12);
 }
 
-h1 {
-    color: #7046d8;
-    margin-bottom: 8px;
-}
-
-.descricao {
-    color: #777;
-    margin-bottom: 30px;
-    line-height: 1.5;
+.treino-box h1 {
+    text-align: center;
+    margin-top: 0;
 }
 
 .secao {
-    margin-top: 30px;
+    margin: 30px 0;
 }
 
 .secao h2 {
-    font-size: 19px;
-    margin-bottom: 7px;
-}
-
-.secao small {
-    color: #777;
+    color: #6f3fb5;
+    font-size: 20px;
 }
 
 .opcoes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-top: 15px;
-}
-
-.opcao {
-    border: 1px solid #e2dcef;
-    border-radius: 13px;
-    padding: 13px;
-    cursor: pointer;
-    background: #faf9ff;
-    transition: .2s;
-}
-
-.opcao:hover {
-    border-color: #7046d8;
 }
 
 .opcao input {
-    accent-color: #7046d8;
-    margin-right: 8px;
+    display: none;
 }
 
-select {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 11px;
-    margin-top: 12px;
-    font-size: 15px;
-    background: white;
-}
-
-button {
-    width: 100%;
-    padding: 16px;
-    margin-top: 35px;
-    border: none;
+.opcao label {
+    display: block;
+    padding: 12px 16px;
+    border: 1px solid #d9cbed;
     border-radius: 13px;
-    background: #7046d8;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
+    background: #faf8ff;
 }
 
-button:hover {
-    background: #5d35c1;
+.opcao input:checked + label {
+    background: #e7d9fa;
+    border-color: #8e5bd5;
+    color: #5b348c;
+    font-weight: bold;
 }
 
-.aviso {
-    margin-top: 18px;
-    background: #f3efff;
-    padding: 13px;
-    border-radius: 12px;
-    color: #665b76;
-    font-size: 13px;
-    line-height: 1.5;
+.gerar-area {
+    text-align: center;
+    margin-top: 35px;
 }
 
-@media (max-width: 700px) {
+@media(max-width: 600px) {
 
-    header {
-        padding: 18px 20px;
+    .treino-page {
+        padding: 15px 10px 40px;
     }
 
-    .logo {
-        font-size: 24px;
+    .topo-treino {
+        min-height: 75px;
+        margin-bottom: 20px;
     }
 
-    .formulario {
-        width: 95%;
-        max-width: 100%;
-        margin: 25px auto;
+    .topo-treino .logo {
+        font-size: 23px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    .botao-inicio {
+        right: 0;
+        top: 50%;
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .treino-box {
         padding: 25px 18px;
-        border-radius: 20px;
-    }
-
-    h1 {
-        font-size: 27px;
-        line-height: 1.25;
-    }
-
-    .descricao {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    .secao {
-        margin-top: 25px;
-    }
-
-    .secao h2 {
-        font-size: 17px;
-        line-height: 1.4;
     }
 
     .opcoes {
-        grid-template-columns: 1fr;
-        gap: 9px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .opcao {
-        padding: 15px 12px;
+    .opcao label {
+        text-align: center;
         font-size: 14px;
     }
 
-    .opcao input {
-        transform: scale(1.15);
-    }
-
-    select {
-        width: 100%;
-        padding: 14px 10px;
-        font-size: 16px;
-    }
-
-    button {
-        margin-top: 28px;
-        padding: 16px 12px;
-        font-size: 15px;
-    }
-
-    .aviso {
-        font-size: 12px;
-        line-height: 1.5;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .formulario {
-        width: 96%;
-        padding: 22px 15px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    .secao h2 {
-        font-size: 16px;
-    }
-
-    .opcao {
-        font-size: 13px;
-    }
 }
 
 </style>
-
-<script>
-
-function limitarObjetivos() {
-
-    const marcados =
-        document.querySelectorAll(
-            'input[name="objetivos"]:checked'
-        );
-
-    if (marcados.length > 2) {
-
-        marcados[marcados.length - 1].checked = false;
-
-        alert(
-            "Você pode selecionar no máximo 2 objetivos."
-        );
-    }
-}
-
-
-function limitarGrupos() {
-
-    const marcados =
-        document.querySelectorAll(
-            'input[name="grupos"]:checked'
-        );
-
-    if (marcados.length > 3) {
-
-        marcados[marcados.length - 1].checked = false;
-
-        alert(
-            "Você pode selecionar no máximo 3 grupos musculares."
-        );
-    }
-}
-
-
-function verificarDias() {
-
-    const dias =
-        document.querySelectorAll(
-            'input[name="dias"]:checked'
-        );
-
-    if (dias.length === 0) {
-
-        alert(
-            "Escolha pelo menos um dia para treinar."
-        );
-
-        return false;
-    }
-
-    return true;
-}
-
-</script>
 
 </head>
 
 <body>
 
-<header>
-
-    <div class="logo">
-        POWER UP 💜
-    </div>
-
-</header>
-
-<div class="formulario">
-
-    <h1>Vamos montar seu treino! 🏋️</h1>
-
-    <p class="descricao">
-        Responda algumas perguntas e o Power Up
-        vai organizar uma sugestão para sua semana.
-    </p>
-
-    <form method="POST" onsubmit="return verificarDias()">
-
-        <!-- OBJETIVOS -->
-
-        <div class="secao">
-
-            <h2>🎯 Quais são seus objetivos?</h2>
-
-            <small>
-                Escolha até 2 objetivos.
-            </small>
-
-            <div class="opcoes">
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="massa"
-                        onchange="limitarObjetivos()"
-                    >
-                    Ganhar massa muscular
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="hipertrofia"
-                        onchange="limitarObjetivos()"
-                    >
-                    Hipertrofia
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="forca"
-                        onchange="limitarObjetivos()"
-                    >
-                    Aumentar força
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="resistencia"
-                        onchange="limitarObjetivos()"
-                    >
-                    Melhorar resistência
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="condicionamento"
-                        onchange="limitarObjetivos()"
-                    >
-                    Melhorar condicionamento
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="objetivos"
-                        value="saude"
-                        onchange="limitarObjetivos()"
-                    >
-                    Saúde e disposição
-                </label>
-
-            </div>
-
-        </div>
-
-        <!-- GRUPOS -->
-
-        <div class="secao">
-
-            <h2>💪 Quais grupos musculares você quer priorizar?</h2>
-
-            <small>
-                Escolha de 1 a 3 grupos.
-            </small>
-
-            <div class="opcoes">
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="gluteos"
-                        onchange="limitarGrupos()"
-                    >
-                    🍑 Glúteos
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="quadriceps"
-                        onchange="limitarGrupos()"
-                    >
-                    Quadríceps
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="posteriores"
-                        onchange="limitarGrupos()"
-                    >
-                    Posteriores
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="panturrilhas"
-                        onchange="limitarGrupos()"
-                    >
-                    Panturrilhas
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="costas"
-                        onchange="limitarGrupos()"
-                    >
-                    Costas
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="peito"
-                        onchange="limitarGrupos()"
-                    >
-                    Peito
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="ombros"
-                        onchange="limitarGrupos()"
-                    >
-                    Ombros
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="biceps"
-                        onchange="limitarGrupos()"
-                    >
-                    Bíceps
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="triceps"
-                        onchange="limitarGrupos()"
-                    >
-                    Tríceps
-                </label>
-
-                <label class="opcao">
-                    <input
-                        type="checkbox"
-                        name="grupos"
-                        value="abdomen"
-                        onchange="limitarGrupos()"
-                    >
-                    Abdômen
-                </label>
-
-            </div>
-
-        </div>
-
-        <!-- EXPERIÊNCIA -->
-
-        <div class="secao">
-
-            <h2>📈 Qual é o seu nível?</h2>
-
-            <select name="experiencia" required>
-
-                <option value="">
-                    Selecione
-                </option>
-
-                <option value="iniciante">
-                    Iniciante
-                </option>
-
-                <option value="intermediario">
-                    Intermediário
-                </option>
-
-                <option value="avancado">
-                    Avançado
-                </option>
-
-            </select>
-
-        </div>
-
-        <!-- TEMPO -->
-
-        <div class="secao">
-
-            <h2>⏱️ Quanto tempo você tem por treino?</h2>
-
-            <select name="tempo" required>
-
-                <option value="">
-                    Selecione
-                </option>
-
-                <option value="20">20 minutos</option>
-                <option value="30">30 minutos</option>
-                <option value="45">45 minutos</option>
-                <option value="60">1 hora</option>
-                <option value="75">1h15</option>
-                <option value="90">1h30</option>
-                <option value="105">1h45</option>
-                <option value="120">2 horas</option>
-
-            </select>
-
-        </div>
-
-        <!-- DIAS -->
-
-        <div class="secao">
-
-            <h2>📅 Em quais dias você pode treinar?</h2>
-
-            <small>
-                Selecione os dias disponíveis.
-            </small>
-
-            <div class="opcoes">
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Segunda">
-                    Segunda
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Terça">
-                    Terça
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Quarta">
-                    Quarta
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Quinta">
-                    Quinta
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Sexta">
-                    Sexta
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Sábado">
-                    Sábado
-                </label>
-
-                <label class="opcao">
-                    <input type="checkbox" name="dias" value="Domingo">
-                    Domingo
-                </label>
-
-            </div>
-
-        </div>
-
-        <button type="submit">
-            🤖 Gerar meu planejamento semanal
-        </button>
-
-        <div class="aviso">
-            💜 O Power Up gera uma sugestão educativa
-            automaticamente. Ela não substitui a orientação
-            de um profissional de Educação Física.
-        </div>
-
-    </form>
+<div class="treino-page">
+
+<div class="topo-treino">
+
+<div class="logo">
+POWER UP
+</div>
+
+<a href="{{ url_for('home') }}" class="botao-inicio">
+← Início
+</a>
+
+</div>
+
+<div class="treino-box">
+
+<h1>Monte seu treino 💜</h1>
+
+<p style="text-align:center;">
+Escolha as opções abaixo para que o sistema
+gere automaticamente uma sugestão.
+</p>
+
+<form method="POST">
+
+<div class="secao">
+
+<h2>🎯 Escolha até 2 objetivos</h2>
+
+<div class="opcoes">
+
+<div class="opcao">
+<input type="checkbox" id="obj1" name="objetivos" value="Ganhar massa muscular">
+<label for="obj1">Ganhar massa muscular</label>
+</div>
+
+<div class="opcao">
+<input type="checkbox" id="obj2" name="objetivos" value="Melhorar condicionamento">
+<label for="obj2">Melhorar condicionamento</label>
+</div>
+
+<div class="opcao">
+<input type="checkbox" id="obj3" name="objetivos" value="Fortalecer o corpo">
+<label for="obj3">Fortalecer o corpo</label>
+</div>
+
+<div class="opcao">
+<input type="checkbox" id="obj4" name="objetivos" value="Melhorar resistência">
+<label for="obj4">Melhorar resistência</label>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="secao">
+
+<h2>💪 Escolha até 3 grupos musculares</h2>
+
+<div class="opcoes">
+
+{% for chave, nome in grupos %}
+
+<div class="opcao">
+
+<input type="checkbox"
+       id="{{ chave }}"
+       name="grupos"
+       value="{{ chave }}">
+
+<label for="{{ chave }}">
+{{ nome }}
+</label>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<div class="secao">
+
+<h2>📅 Escolha os dias da semana</h2>
+
+<div class="opcoes">
+
+{% for dia in dias %}
+
+<div class="opcao">
+
+<input type="checkbox"
+       id="{{ dia }}"
+       name="dias"
+       value="{{ dia }}">
+
+<label for="{{ dia }}">
+{{ dia }}
+</label>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<div class="secao">
+
+<h2>⏱️ Tempo disponível por treino</h2>
+
+<div class="opcoes">
+
+<div class="opcao">
+
+<input type="radio"
+       id="tempo30"
+       name="tempo"
+       value="30"
+       required>
+
+<label for="tempo30">
+30 minutos
+</label>
+
+</div>
+
+<div class="opcao">
+
+<input type="radio"
+       id="tempo45"
+       name="tempo"
+       value="45">
+
+<label for="tempo45">
+45 minutos
+</label>
+
+</div>
+
+<div class="opcao">
+
+<input type="radio"
+       id="tempo60"
+       name="tempo"
+       value="60">
+
+<label for="tempo60">
+60 minutos
+</label>
+
+</div>
+
+<div class="opcao">
+
+<input type="radio"
+       id="tempo90"
+       name="tempo"
+       value="90">
+
+<label for="tempo90">
+90 minutos
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="secao">
+
+<h2>📈 Nível de experiência</h2>
+
+<div class="opcoes">
+
+<div class="opcao">
+
+<input type="radio"
+       id="iniciante"
+       name="experiencia"
+       value="Iniciante"
+       required>
+
+<label for="iniciante">
+Iniciante
+</label>
+
+</div>
+
+<div class="opcao">
+
+<input type="radio"
+       id="intermediario"
+       name="experiencia"
+       value="Intermediário">
+
+<label for="intermediario">
+Intermediário
+</label>
+
+</div>
+
+<div class="opcao">
+
+<input type="radio"
+       id="avancado"
+       name="experiencia"
+       value="Avançado">
+
+<label for="avancado">
+Avançado
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="gerar-area">
+
+<button class="botao" type="submit">
+✨ Gerar meu treino
+</button>
+
+</div>
+
+</form>
+
+</div>
 
 </div>
 
 </body>
-
 </html>
 """
 
 
-# =========================================================
-# RESULTADO SEMANAL
-# =========================================================
+# ============================================================
+# RESULTADO
+# ============================================================
 
 RESULTADO_HTML = """
 <!DOCTYPE html>
@@ -2142,518 +1575,240 @@ RESULTADO_HTML = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meu planejamento | Power Up</title>
+<title>Seu treino - Power Up</title>
+
+""" + ESTILO + """
 
 <style>
 
-* {
-    box-sizing: border-box;
+.resultado-page {
+    min-height: 100vh;
+    padding: 25px 15px 50px;
 }
 
-html,
-body {
+.resultado-topo {
     width: 100%;
-    overflow-x: hidden;
+    max-width: 1100px;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f5ff;
-    color: #30263d;
-}
-
-header {
+.home-button {
     background: white;
-    padding: 22px 60px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.06);
-}
-
-.logo {
-    color: #7046d8;
-    font-size: 27px;
+    color: #6f3fb5;
+    border: 1px solid #d9cbed;
+    padding: 10px 15px;
+    border-radius: 12px;
     font-weight: bold;
 }
 
-.container {
-    width: 1000px;
-    max-width: 94%;
-    margin: 40px auto;
-}
-
-.topo {
-    background: linear-gradient(135deg, #7046d8, #987de4);
-    color: white;
+.resultado-box {
+    background: white;
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
     padding: 35px;
     border-radius: 25px;
-    margin-bottom: 25px;
+    box-shadow: 0 15px 40px rgba(70, 40, 100, 0.12);
 }
 
-.topo h1 {
-    margin: 0 0 12px;
-}
-
-.topo p {
-    line-height: 1.5;
-}
-
-.infos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.info {
-    background: rgba(255,255,255,.16);
-    padding: 9px 13px;
-    border-radius: 20px;
-    font-size: 14px;
+.resumo {
+    background: #f3ecfc;
+    padding: 20px;
+    border-radius: 17px;
+    margin: 25px 0;
+    line-height: 1.8;
 }
 
 .dia {
-    background: white;
-    margin: 20px 0;
-    padding: 25px;
-    border-radius: 22px;
-    box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    margin-top: 35px;
 }
 
 .dia h2 {
-    color: #7046d8;
-    margin-top: 0;
-}
-
-.grupos {
-    color: #777;
-    margin-bottom: 18px;
+    color: #6f3fb5;
 }
 
 .exercicio {
-    border: 1px solid #e9e4f4;
-    border-radius: 15px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-.exercicio-cabecalho {
-    padding: 17px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fcfbff;
-    font-weight: bold;
-    gap: 10px;
-}
-
-.exercicio-cabecalho:hover {
-    background: #f2edff;
-}
-
-.seta {
-    color: #7046d8;
-    font-size: 20px;
-    flex-shrink: 0;
-}
-
-.exercicio-info {
-    display: none;
+    border: 1px solid #dfd4ed;
+    border-radius: 17px;
+    margin: 15px 0;
     padding: 20px;
-    border-top: 1px solid #eee;
-    background: white;
+    background: #fff;
 }
 
-.exercicio-info.aberto {
-    display: flex;
-    gap: 25px;
-    align-items: flex-start;
-}
-
-.exercicio-info img {
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 13px;
-    flex-shrink: 0;
-}
-
-.texto-exercicio {
-    line-height: 1.6;
-}
-
-.texto-exercicio h3 {
-    color: #7046d8;
+.exercicio h3 {
     margin-top: 0;
+    color: #5b348c;
 }
 
-.voltar {
-    display: inline-block;
-    margin: 20px 0 50px;
-    padding: 14px 24px;
-    background: #7046d8;
-    color: white;
-    text-decoration: none;
-    border-radius: 11px;
-    font-weight: bold;
+.exercicio p {
+    line-height: 1.65;
 }
 
 .aviso {
-    background: #f0ebff;
-    padding: 17px;
-    border-radius: 14px;
-    color: #655b73;
-    margin-top: 25px;
-    line-height: 1.5;
+    background: #fff8e8;
+    border: 1px solid #ead7a5;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 30px;
+    line-height: 1.6;
 }
 
-@media (max-width: 800px) {
+@media(max-width: 600px) {
 
-    header {
-        padding: 18px 20px;
+    .resultado-page {
+        padding: 15px 10px 35px;
     }
 
-    .logo {
-        font-size: 24px;
+    .resultado-topo {
+        margin-bottom: 20px;
     }
 
-    .container {
-        width: 95%;
-        max-width: 100%;
-        margin: 25px auto;
+    .resultado-topo .logo {
+        font-size: 22px;
     }
 
-    .topo {
-        padding: 25px 20px;
-        border-radius: 20px;
-    }
-
-    .topo h1 {
-        font-size: 27px;
-        line-height: 1.25;
-    }
-
-    .topo p {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    .infos {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-
-    .info {
+    .home-button {
         font-size: 13px;
-        padding: 10px 12px;
+        padding: 8px 10px;
     }
 
-    .dia {
-        padding: 18px 15px;
-        border-radius: 18px;
+    .resultado-box {
+        padding: 23px 17px;
     }
 
-    .dia h2 {
-        font-size: 20px;
-    }
-
-    .grupos {
-        font-size: 13px;
-    }
-
-    .exercicio-cabecalho {
-        padding: 15px 12px;
-        font-size: 14px;
-    }
-
-    .seta {
-        font-size: 18px;
-    }
-
-    .exercicio-info.aberto {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-    }
-
-    .exercicio-info img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        max-height: 280px;
-        object-fit: cover;
-    }
-
-    .texto-exercicio {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    .texto-exercicio h3 {
-        font-size: 18px;
-    }
-
-    .voltar {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .aviso {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-}
-
-@media (max-width: 400px) {
-
-    .container {
-        width: 96%;
-    }
-
-    .topo {
-        padding: 22px 16px;
-    }
-
-    .topo h1 {
-        font-size: 24px;
-    }
-
-    .dia {
-        padding: 16px 12px;
-    }
-
-    .exercicio-cabecalho {
-        font-size: 13px;
-    }
-
-    .exercicio-info.aberto {
-        padding: 12px;
-    }
-
-    .texto-exercicio {
-        font-size: 13px;
-    }
 }
 
 </style>
-
-<script>
-
-function abrirExercicio(id) {
-
-    const elemento =
-        document.getElementById(id);
-
-    elemento.classList.toggle("aberto");
-
-}
-
-</script>
 
 </head>
 
 <body>
 
-<header>
+<div class="resultado-page">
 
-    <div class="logo">
-        POWER UP 💜
-    </div>
+<div class="resultado-topo">
 
-</header>
+<div class="logo">
+POWER UP
+</div>
 
-<div class="container">
+<a href="{{ url_for('home') }}" class="home-button">
+← Início
+</a>
 
-    <div class="topo">
+</div>
 
-        <h1>
-            Seu planejamento semanal 🎉
-        </h1>
+<div class="resultado-box">
 
-        <p>
-            O Power Up organizou uma sugestão
-            de acordo com suas respostas.
-        </p>
+<h1>Seu treino foi montado! 💜</h1>
 
-        <div class="infos">
+<div class="resumo">
 
-            <div class="info">
-                🎯 {{ objetivos }}
-            </div>
+<strong>Objetivos:</strong>
+{{ objetivos|join(", ") }}
 
-            <div class="info">
-                💪 {{ grupos }}
-            </div>
+<br>
 
-            <div class="info">
-                ⏱️ {{ tempo }} minutos
-            </div>
+<strong>Grupos musculares:</strong>
+{{ grupos_nomes|join(", ") }}
 
-            <div class="info">
-                📈 {{ experiencia }}
-            </div>
+<br>
 
-        </div>
+<strong>Tempo:</strong>
+{{ tempo }} minutos
 
-    </div>
+<br>
 
-    {% for dia in semana %}
+<strong>Nível:</strong>
+{{ experiencia }}
 
-    <div class="dia">
+</div>
 
-        <h2>
-            📅 {{ dia["dia"] }}
-        </h2>
 
-        <div class="grupos">
-            {{ dia["grupos"] }}
-        </div>
+{% for dia, exercicios in semana.items() %}
 
-        {% for exercicio in dia["exercicios"] %}
+<div class="dia">
 
-        <div class="exercicio">
+<h2>📅 {{ dia }}</h2>
 
-            <div
-                class="exercicio-cabecalho"
-                onclick="abrirExercicio('ex{{ loop.index }}{{ loop.index0 }}{{ dia['numero'] }}')"
-            >
+{% for exercicio in exercicios %}
 
-                <span>
-                    💪 {{ exercicio["nome"] }}
-                </span>
+<div class="exercicio">
 
-                <span class="seta">
-                    ▾
-                </span>
+<h3>{{ exercicio.nome }}</h3>
 
-            </div>
+<p>
+<strong>Músculos trabalhados:</strong>
+{{ exercicio.musculos }}
+</p>
 
-            <div
-                class="exercicio-info"
-                id="ex{{ loop.index }}{{ loop.index0 }}{{ dia['numero'] }}"
-            >
+<p>
+<strong>Como executar:</strong><br>
+{{ exercicio.execucao }}
+</p>
 
-                <img
-                    src="{{ url_for('static', filename='imagens/' + exercicio['imagem']) }}"
-                    alt="{{ exercicio['nome'] }}"
-                    onerror="this.style.display='none'"
-                >
+</div>
 
-                <div class="texto-exercicio">
+{% endfor %}
 
-                    <h3>
-                        {{ exercicio["nome"] }}
-                    </h3>
+</div>
 
-                    <p>
-                        <strong>
-                            Músculos trabalhados:
-                        </strong>
-                        {{ exercicio["musculos"] }}
-                    </p>
+{% endfor %}
 
-                    <p>
-                        <strong>
-                            Como executar:
-                        </strong>
-                    </p>
 
-                    <p>
-                        {{ exercicio["execucao"] }}
-                    </p>
+<div class="aviso">
 
-                </div>
+<strong>⚠️ Aviso:</strong><br>
 
-            </div>
+Este treino é uma sugestão gerada automaticamente
+para fins educativos e demonstrativos. Ele não substitui
+a orientação de um profissional de Educação Física.
+Respeite seus limites e procure orientação adequada
+antes de realizar exercícios.
 
-        </div>
+</div>
 
-        {% endfor %}
+<br>
 
-    </div>
+<div style="text-align:center;">
 
-    {% endfor %}
+<a href="{{ url_for('treino') }}" class="botao">
+Montar outro treino
+</a>
 
-    <div class="aviso">
+</div>
 
-        💜 <strong>Power Up:</strong>
-        esta é uma sugestão educativa gerada
-        automaticamente pelo sistema.
-
-        <br><br>
-
-        Para qualquer atividade física, especialmente
-        em caso de dúvidas sobre execução, cargas ou
-        limitações, procure orientação profissional.
-
-    </div>
-
-    <a class="voltar" href="/treino">
-        🔄 Criar outro planejamento
-    </a>
+</div>
 
 </div>
 
 </body>
-
 </html>
 """
 
 
-# =========================================================
-# FUNÇÕES DE AUTOMAÇÃO
-# =========================================================
-
-def nome_grupo(grupo):
-
-    nomes = {
-        "gluteos": "Glúteos",
-        "quadriceps": "Quadríceps",
-        "posteriores": "Posteriores",
-        "panturrilhas": "Panturrilhas",
-        "costas": "Costas",
-        "peito": "Peito",
-        "ombros": "Ombros",
-        "biceps": "Bíceps",
-        "triceps": "Tríceps",
-        "abdomen": "Abdômen"
-    }
-
-    return nomes.get(grupo, grupo)
-
+# ============================================================
+# FUNÇÕES DO SISTEMA
+# ============================================================
 
 def escolher_quantidade_exercicios(tempo, experiencia):
 
-    tempo = int(tempo)
-
-    if tempo <= 20:
-        quantidade = 2
-
-    elif tempo <= 30:
+    if tempo <= 30:
         quantidade = 3
 
     elif tempo <= 45:
         quantidade = 4
 
     elif tempo <= 60:
-        quantidade = 5
-
-    elif tempo <= 75:
         quantidade = 6
 
-    elif tempo <= 90:
-        quantidade = 7
-
-    elif tempo <= 105:
+    else:
         quantidade = 8
 
-    else:
-        quantidade = 9
-
-    if experiencia == "iniciante":
+    if experiencia == "Iniciante":
         quantidade = max(2, quantidade - 1)
 
     return quantidade
@@ -2661,85 +1816,74 @@ def escolher_quantidade_exercicios(tempo, experiencia):
 
 def montar_semana(dias, grupos, tempo, experiencia):
 
-    semana = []
+    semana = {}
 
-    quantidade_total = escolher_quantidade_exercicios(
+    if not grupos:
+        grupos = ["gluteos"]
+
+    quantidade = escolher_quantidade_exercicios(
         tempo,
         experiencia
     )
 
-    if not grupos:
-        grupos = ["corpo_todo"]
+    grupos_finais = list(grupos)
+
+    for grupo in grupos:
+
+        for relacionado in GRUPOS_RELACIONADOS.get(grupo, []):
+
+            if relacionado not in grupos_finais:
+                grupos_finais.append(relacionado)
+
+    todos_exercicios = []
+
+    for grupo in grupos_finais:
+
+        for exercicio in EXERCICIOS.get(grupo, []):
+
+            if exercicio not in todos_exercicios:
+                todos_exercicios.append(exercicio)
+
+    if not todos_exercicios:
+        todos_exercicios = EXERCICIOS["gluteos"]
+
+    if not dias:
+        dias = ["Segunda-feira"]
 
     for indice, dia in enumerate(dias):
 
-        grupo_principal = grupos[indice % len(grupos)]
+        inicio = (indice * quantidade) % len(todos_exercicios)
 
-        grupos_do_dia = [grupo_principal]
+        exercicios_dia = []
 
-        if len(grupos) > 1 and indice % 2 == 0:
+        for i in range(quantidade):
 
-            segundo = grupos[
-                (indice + 1) % len(grupos)
-            ]
+            posicao = (inicio + i) % len(todos_exercicios)
 
-            if segundo != grupo_principal:
-                grupos_do_dia.append(segundo)
+            exercicio = todos_exercicios[posicao]
 
-        elif len(grupos) == 1:
+            if exercicio not in exercicios_dia:
+                exercicios_dia.append(exercicio)
 
-            relacionados = GRUPOS_RELACIONADOS.get(
-                grupo_principal,
-                []
-            )
-
-            if relacionados:
-                grupos_do_dia.append(
-                    relacionados[indice % len(relacionados)]
-                )
-
-        exercicios_do_dia = []
-
-        for grupo in grupos_do_dia:
-
-            lista = EXERCICIOS.get(grupo, [])
-
-            for exercicio in lista:
-
-                if exercicio not in exercicios_do_dia:
-                    exercicios_do_dia.append(exercicio)
-
-        exercicios_do_dia = exercicios_do_dia[
-            :quantidade_total
-        ]
-
-        semana.append({
-            "numero": indice,
-            "dia": dia,
-            "grupos": " + ".join(
-                nome_grupo(g)
-                for g in grupos_do_dia
-            ),
-            "exercicios": exercicios_do_dia
-        })
+        semana[dia] = exercicios_dia
 
     return semana
 
 
-# =========================================================
+# ============================================================
 # ROTAS
-# =========================================================
+# ============================================================
 
 @app.route("/", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
 
-        email = request.form.get("email")
-        senha = request.form.get("senha")
+        email = request.form.get("email", "")
 
-        session["email"] = email
-        session["nome"] = email.split("@")[0].title()
+        nome = email.split("@")[0]
+
+        session["nome"] = nome
 
         return redirect(url_for("home"))
 
@@ -2751,11 +1895,21 @@ def cadastro():
 
     if request.method == "POST":
 
-        nome = request.form.get("nome")
-        email = request.form.get("email")
+        nome = request.form.get("nome", "")
+
+        senha = request.form.get("senha", "")
+        confirmar = request.form.get("confirmar_senha", "")
+
+        if senha != confirmar:
+
+            return """
+            <script>
+            alert("As senhas não são iguais.");
+            history.back();
+            </script>
+            """
 
         session["nome"] = nome
-        session["email"] = email
 
         return redirect(url_for("home"))
 
@@ -2765,10 +1919,7 @@ def cadastro():
 @app.route("/home")
 def home():
 
-    nome = session.get(
-        "nome",
-        "Usuário"
-    )
+    nome = session.get("nome", "Usuária")
 
     return render_template_string(
         HOME_HTML,
@@ -2779,127 +1930,114 @@ def home():
 @app.route("/wendy")
 def wendy():
 
-    duvida = request.args.get("duvida")
+    return render_template_string(
+        WENDY_HTML
+    )
 
-    respostas = {
 
-        "agachamento":
-            "O agachamento é um exercício que pode trabalhar principalmente pernas e glúteos. A execução deve ser controlada e adequada ao nível de cada pessoa.",
+# ============================================================
+# NOVA ROTA - DÚVIDAS SOBRE EXERCÍCIOS
+# ============================================================
 
-        "treino":
-            "O Power Up utiliza as informações escolhidas pelo usuário para organizar automaticamente uma sugestão de treino para os dias selecionados.",
+@app.route("/duvidas-exercicios")
+def duvidas_exercicios():
 
-        "exercicios":
-            "Os exercícios são escolhidos a partir de uma base cadastrada no sistema. Ao clicar na setinha de um exercício, você pode visualizar sua explicação e imagem."
-    }
+    exercicios = []
 
-    resposta = respostas.get(duvida)
+    for grupo in EXERCICIOS.values():
+
+        for exercicio in grupo:
+
+            if exercicio not in exercicios:
+                exercicios.append(exercicio)
 
     return render_template_string(
-        WENDY_HTML,
-        resposta=resposta
+        DUVIDAS_HTML,
+        exercicios=exercicios
     )
 
 
 @app.route("/treino", methods=["GET", "POST"])
 def treino():
 
+    grupos = [
+        ("gluteos", "Glúteos"),
+        ("quadriceps", "Quadríceps"),
+        ("posteriores", "Posteriores"),
+        ("panturrilhas", "Panturrilhas"),
+        ("costas", "Costas"),
+        ("peito", "Peito"),
+        ("ombros", "Ombros"),
+        ("biceps", "Bíceps"),
+        ("triceps", "Tríceps"),
+        ("abdomen", "Abdômen")
+    ]
+
+    dias = [
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado",
+        "Domingo"
+    ]
+
     if request.method == "POST":
 
-        objetivos = request.form.getlist(
-            "objetivos"
-        )
+        objetivos = request.form.getlist("objetivos")
+        grupos_selecionados = request.form.getlist("grupos")
+        dias_selecionados = request.form.getlist("dias")
 
-        grupos = request.form.getlist(
-            "grupos"
+        tempo = int(
+            request.form.get("tempo", 30)
         )
 
         experiencia = request.form.get(
-            "experiencia"
-        )
-
-        tempo = request.form.get(
-            "tempo"
-        )
-
-        dias = request.form.getlist(
-            "dias"
+            "experiencia",
+            "Iniciante"
         )
 
         objetivos = objetivos[:2]
-        grupos = grupos[:3]
 
-        if not grupos:
-            grupos = ["gluteos"]
+        grupos_selecionados = grupos_selecionados[:3]
 
         semana = montar_semana(
-            dias,
-            grupos,
+            dias_selecionados,
+            grupos_selecionados,
             tempo,
             experiencia
         )
 
-        nomes_objetivos = {
+        nomes_grupos = dict(grupos)
 
-            "massa": "Ganhar massa muscular",
-            "hipertrofia": "Hipertrofia",
-            "forca": "Aumentar força",
-            "resistencia": "Melhorar resistência",
-            "condicionamento": "Melhorar condicionamento",
-            "saude": "Saúde e disposição"
-        }
-
-        objetivos_formatados = ", ".join(
-
-            nomes_objetivos.get(
-                objetivo,
-                objetivo
+        grupos_nomes = [
+            nomes_grupos.get(
+                grupo,
+                grupo
             )
+            for grupo in grupos_selecionados
+        ]
 
-            for objetivo in objetivos
+        if not grupos_nomes:
+            grupos_nomes = ["Glúteos"]
 
-        )
-
-        if not objetivos_formatados:
-            objetivos_formatados = "Não informado"
-
-        grupos_formatados = ", ".join(
-
-            nome_grupo(grupo)
-
-            for grupo in grupos
-
-        )
-
-        experiencia_formatada = {
-
-            "iniciante": "Iniciante",
-            "intermediario": "Intermediário",
-            "avancado": "Avançado"
-
-        }.get(
-            experiencia,
-            experiencia
-        )
+        if not objetivos:
+            objetivos = ["Fortalecer o corpo"]
 
         return render_template_string(
-
             RESULTADO_HTML,
-
-            semana=semana,
-
-            objetivos=objetivos_formatados,
-
-            grupos=grupos_formatados,
-
+            objetivos=objetivos,
+            grupos_nomes=grupos_nomes,
             tempo=tempo,
-
-            experiencia=experiencia_formatada
-
+            experiencia=experiencia,
+            semana=semana
         )
 
     return render_template_string(
-        TREINO_HTML
+        TREINO_HTML,
+        grupos=grupos,
+        dias=dias
     )
 
 
@@ -2911,12 +2049,14 @@ def sair():
     return redirect(url_for("login"))
 
 
-# =========================================================
+# ============================================================
 # INICIAR SERVIDOR
-# =========================================================
+# ============================================================
 
 if __name__ == "__main__":
 
     app.run(
+        host="0.0.0.0",
+        port=5000,
         debug=True
     )
