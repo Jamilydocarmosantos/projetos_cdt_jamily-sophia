@@ -1,7 +1,56 @@
 from flask import Flask, request, redirect, url_for, render_template_string, session
+import sqlite3
+import hashlib
+import os
 
 app = Flask(__name__)
 app.secret_key = "power_up_sophia_2026"
+
+# ============================================================
+# BANCO DE DADOS
+# ============================================================
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "power_up.db")
+
+
+def conectar_banco():
+    conexao = sqlite3.connect(DB_PATH)
+    conexao.row_factory = sqlite3.Row
+    return conexao
+
+
+def criar_banco():
+
+    conexao = conectar_banco()
+
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            telefone TEXT NOT NULL,
+            cep TEXT NOT NULL,
+            data_nascimento TEXT NOT NULL,
+            academia TEXT NOT NULL,
+            senha TEXT NOT NULL
+        )
+    """)
+
+    conexao.commit()
+    conexao.close()
+
+
+def criar_hash_senha(senha):
+    return hashlib.sha256(
+        senha.encode("utf-8")
+    ).hexdigest()
+
+
+# Cria o banco automaticamente
+criar_banco()
 
 
 # ============================================================
@@ -303,11 +352,16 @@ input:focus {
 LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Power Up - Login</title>
+
 """ + ESTILO + """
+
 <style>
 
 .login-page {
@@ -374,6 +428,15 @@ LOGIN_HTML = """
     margin-top: 20px;
 }
 
+.mensagem-erro {
+    background: #ffeaea;
+    border: 1px solid #f0b5b5;
+    color: #a32d2d;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
 @media(max-width: 750px) {
 
     .login-box {
@@ -391,6 +454,7 @@ LOGIN_HTML = """
 }
 
 </style>
+
 </head>
 
 <body>
@@ -418,6 +482,14 @@ assistente virtual Wendy.
 <h2>Entrar</h2>
 
 <p>Entre para acessar sua conta.</p>
+
+{% if erro %}
+
+<div class="mensagem-erro">
+{{ erro }}
+</div>
+
+{% endif %}
 
 <form method="POST">
 
@@ -529,6 +601,16 @@ CADASTRO_HTML = """
     margin-top: 25px;
 }
 
+.mensagem-erro {
+    background: #ffeaea;
+    border: 1px solid #f0b5b5;
+    color: #a32d2d;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 @media(max-width: 600px) {
 
     .cadastro-box {
@@ -565,6 +647,14 @@ CADASTRO_HTML = """
 Cadastre seus dados para acessar o Power Up.
 </p>
 
+{% if erro %}
+
+<div class="mensagem-erro">
+{{ erro }}
+</div>
+
+{% endif %}
+
 <form method="POST">
 
 <div class="form-grid">
@@ -573,7 +663,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>Nome</label>
 
-<input type="text" name="nome" required>
+<input type="text" name="nome" value="{{ dados.nome }}" required>
 
 </div>
 
@@ -581,7 +671,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>E-mail</label>
 
-<input type="email" name="email" required>
+<input type="email" name="email" value="{{ dados.email }}" required>
 
 </div>
 
@@ -589,7 +679,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>Telefone</label>
 
-<input type="text" name="telefone" required>
+<input type="text" name="telefone" value="{{ dados.telefone }}" required>
 
 </div>
 
@@ -597,7 +687,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>CEP</label>
 
-<input type="text" name="cep" required>
+<input type="text" name="cep" value="{{ dados.cep }}" required>
 
 </div>
 
@@ -605,7 +695,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>Data de nascimento</label>
 
-<input type="date" name="data_nascimento" required>
+<input type="date" name="data_nascimento" value="{{ dados.data_nascimento }}" required>
 
 </div>
 
@@ -613,7 +703,7 @@ Cadastre seus dados para acessar o Power Up.
 
 <label>Academia</label>
 
-<input type="text" name="academia" required>
+<input type="text" name="academia" value="{{ dados.academia }}" required>
 
 </div>
 
@@ -1113,7 +1203,6 @@ Clique em um exercício para ver os músculos trabalhados
 e entender como realizar o movimento.
 </p>
 
-
 {% for exercicio in exercicios %}
 
 <details class="exercicio-duvida">
@@ -1139,7 +1228,6 @@ e entender como realizar o movimento.
 </details>
 
 {% endfor %}
-
 
 <br>
 
@@ -1371,7 +1459,6 @@ gere automaticamente uma sugestão.
 
 </div>
 
-
 <div class="secao">
 
 <h2>💪 Escolha até 3 grupos musculares</h2>
@@ -1399,7 +1486,6 @@ gere automaticamente uma sugestão.
 
 </div>
 
-
 <div class="secao">
 
 <h2>📅 Escolha os dias da semana</h2>
@@ -1426,7 +1512,6 @@ gere automaticamente uma sugestão.
 </div>
 
 </div>
-
 
 <div class="secao">
 
@@ -1491,7 +1576,6 @@ gere automaticamente uma sugestão.
 
 </div>
 
-
 <div class="secao">
 
 <h2>📈 Nível de experiência</h2>
@@ -1541,7 +1625,6 @@ Avançado
 </div>
 
 </div>
-
 
 <div class="gerar-area">
 
@@ -1727,7 +1810,6 @@ POWER UP
 
 </div>
 
-
 {% for dia, exercicios in semana.items() %}
 
 <div class="dia">
@@ -1757,7 +1839,6 @@ POWER UP
 </div>
 
 {% endfor %}
-
 
 <div class="aviso">
 
@@ -1877,49 +1958,177 @@ def montar_semana(dias, grupos, tempo, experiencia):
 @app.route("/", methods=["GET", "POST"])
 def login():
 
+    erro = None
+
     if request.method == "POST":
 
-        email = request.form.get("email", "")
+        email = request.form.get("email", "").strip().lower()
+        senha = request.form.get("senha", "")
 
-        nome = email.split("@")[0]
+        senha_hash = criar_hash_senha(senha)
 
-        session["nome"] = nome
+        conexao = conectar_banco()
 
-        return redirect(url_for("home"))
+        usuario = conexao.execute(
+            """
+            SELECT *
+            FROM usuarios
+            WHERE email = ?
+            AND senha = ?
+            """,
+            (email, senha_hash)
+        ).fetchone()
 
-    return render_template_string(LOGIN_HTML)
+        conexao.close()
 
+        if usuario:
+
+            session["usuario_id"] = usuario["id"]
+            session["nome"] = usuario["nome"]
+            session["email"] = usuario["email"]
+
+            return redirect(url_for("home"))
+
+        erro = "E-mail ou senha incorretos."
+
+    return render_template_string(
+        LOGIN_HTML,
+        erro=erro
+    )
+
+
+# ============================================================
+# CADASTRO
+# ============================================================
 
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
 
+    erro = None
+
+    dados = {
+        "nome": "",
+        "email": "",
+        "telefone": "",
+        "cep": "",
+        "data_nascimento": "",
+        "academia": ""
+    }
+
     if request.method == "POST":
 
-        nome = request.form.get("nome", "")
+        nome = request.form.get("nome", "").strip()
+        email = request.form.get("email", "").strip().lower()
+        telefone = request.form.get("telefone", "").strip()
+        cep = request.form.get("cep", "").strip()
+        data_nascimento = request.form.get(
+            "data_nascimento",
+            ""
+        ).strip()
+        academia = request.form.get("academia", "").strip()
 
         senha = request.form.get("senha", "")
         confirmar = request.form.get("confirmar_senha", "")
 
+        dados = {
+            "nome": nome,
+            "email": email,
+            "telefone": telefone,
+            "cep": cep,
+            "data_nascimento": data_nascimento,
+            "academia": academia
+        }
+
         if senha != confirmar:
 
-            return """
-            <script>
-            alert("As senhas não são iguais.");
-            history.back();
-            </script>
-            """
+            erro = "As senhas não são iguais."
 
-        session["nome"] = nome
+            return render_template_string(
+                CADASTRO_HTML,
+                erro=erro,
+                dados=dados
+            )
 
-        return redirect(url_for("home"))
+        senha_hash = criar_hash_senha(senha)
 
-    return render_template_string(CADASTRO_HTML)
+        try:
 
+            conexao = conectar_banco()
+
+            conexao.execute(
+                """
+                INSERT INTO usuarios (
+                    nome,
+                    email,
+                    telefone,
+                    cep,
+                    data_nascimento,
+                    academia,
+                    senha
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    nome,
+                    email,
+                    telefone,
+                    cep,
+                    data_nascimento,
+                    academia,
+                    senha_hash
+                )
+            )
+
+            conexao.commit()
+
+            usuario = conexao.execute(
+                """
+                SELECT *
+                FROM usuarios
+                WHERE email = ?
+                """,
+                (email,)
+            ).fetchone()
+
+            conexao.close()
+
+            session["usuario_id"] = usuario["id"]
+            session["nome"] = usuario["nome"]
+            session["email"] = usuario["email"]
+
+            return redirect(url_for("home"))
+
+        except sqlite3.IntegrityError:
+
+            erro = "Este e-mail já está cadastrado."
+
+            return render_template_string(
+                CADASTRO_HTML,
+                erro=erro,
+                dados=dados
+            )
+
+    return render_template_string(
+        CADASTRO_HTML,
+        erro=erro,
+        dados=dados
+    )
+
+
+# ============================================================
+# HOME
+# ============================================================
 
 @app.route("/home")
 def home():
 
-    nome = session.get("nome", "Usuária")
+    if "usuario_id" not in session:
+        return redirect(url_for("login"))
+
+    nome = session.get(
+        "nome",
+        "Usuária"
+    )
 
     return render_template_string(
         HOME_HTML,
@@ -1927,8 +2136,15 @@ def home():
     )
 
 
+# ============================================================
+# WENDY
+# ============================================================
+
 @app.route("/wendy")
 def wendy():
+
+    if "usuario_id" not in session:
+        return redirect(url_for("login"))
 
     return render_template_string(
         WENDY_HTML
@@ -1936,11 +2152,14 @@ def wendy():
 
 
 # ============================================================
-# NOVA ROTA - DÚVIDAS SOBRE EXERCÍCIOS
+# DÚVIDAS SOBRE EXERCÍCIOS
 # ============================================================
 
 @app.route("/duvidas-exercicios")
 def duvidas_exercicios():
+
+    if "usuario_id" not in session:
+        return redirect(url_for("login"))
 
     exercicios = []
 
@@ -1957,8 +2176,15 @@ def duvidas_exercicios():
     )
 
 
+# ============================================================
+# MONTAR TREINO
+# ============================================================
+
 @app.route("/treino", methods=["GET", "POST"])
 def treino():
+
+    if "usuario_id" not in session:
+        return redirect(url_for("login"))
 
     grupos = [
         ("gluteos", "Glúteos"),
@@ -1989,9 +2215,12 @@ def treino():
         grupos_selecionados = request.form.getlist("grupos")
         dias_selecionados = request.form.getlist("dias")
 
-        tempo = int(
-            request.form.get("tempo", 30)
-        )
+        try:
+            tempo = int(
+                request.form.get("tempo", 30)
+            )
+        except ValueError:
+            tempo = 30
 
         experiencia = request.form.get(
             "experiencia",
@@ -2040,6 +2269,10 @@ def treino():
         dias=dias
     )
 
+
+# ============================================================
+# SAIR
+# ============================================================
 
 @app.route("/sair")
 def sair():
